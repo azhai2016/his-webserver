@@ -15,15 +15,15 @@ return [
      // 数据库类型
      'type'        => 'sqlsrv',
      // 服务器地址
-     'hostname'    => '112.84.105.155',
+     'hostname'    => '192.168.8.27',
      // 数据库名
      'database'    => 'his',
      // 数据库用户名
      'username'    => 'sa',
      // 数据库密码
-     'password'    => 'azsOFT2017',
+     'password'    => 'Ehhr2018',
      // 端口
-     'hostport'   => '3433',
+     'hostport'   => '1433',
      // 数据库编码默认采用utf8
      'charset'     => 'utf8',
      // 数据库表前缀

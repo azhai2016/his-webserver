@@ -30,6 +30,11 @@ Route::post('api/logs', 'api/index/logs');
 Route::get('api/userinfo', 'api/index/userinfo');
 Route::post('api/setorderid', 'api/index/setorderid');
 Route::get('api/setorderid', 'api/index/setorderid');
+Route::post('api/getqcimg', 'api/index/getQcImg');
+Route::get('api/getqcimg', 'api/index/getQcImg');
+Route::get('api/getcode', 'api/index/getcode');
+Route::get('api/setcode', 'api/index/setcode');
+Route::get('api/history', 'api/index/history');
 
 //})->prefix('\app\api\\');
 

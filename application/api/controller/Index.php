@@ -20,6 +20,50 @@ class Index extends Controller
         return  json_encode($rs);
     }
 
+    public function getcode()
+    {
+        $n = input('n', '');
+        $cd = input('cd', '');
+        $rs = Db::connect("SqlserverHis")->query("exec getCode @name='$n',@cd='$cd' ");
+        trace($rs);
+        return  json_encode($rs);
+    }
+
+    public function setcode()
+    {
+        $spid = input('spid', '');
+        $hiscode = input('hiscode', '');
+        $hisrowid = input('hisrowid', '');
+        $rs = Db::connect("SqlserverHis")->query("exec setCode @spid='$spid',@hiscode='$hiscode',@hisrowid='$hisrowid' ");
+        return  json_encode($rs);
+    }
+
+    /**
+    *  读取质检单数据
+    *
+    **/
+    public function getQcImg()
+    {
+        //$page = input('page', 1);
+        $k = input('p');
+        $v = input('l');
+        trace($k.':'.$v);
+        $path = '../qcimg/';
+        $rs = Db::connect("SqlserverHis")->query("exec getQcImage @name='$k',@lot='$v'");
+        $rsarray = [];
+        //trace(count($rs));
+        foreach ($rs as $key => $value) {
+            $img = $value[$key]['imgData'];
+            $imgdata = base64_encode($img);
+            $path = 'qcimg/'.time().'.jpg';
+            file_put_contents($path, $img);
+            $rsarray[$key]['path']= $path;
+            $rsarray[$key]['img']=$imgdata;
+        }
+        trace(count($rsarray));
+        return  json_encode($rsarray);
+    }
+
     /**
      * 显示创建资源表单页.
      *
@@ -59,6 +103,18 @@ class Index extends Controller
          $rs = Db::connect("SqlserverHis")->query($sql);
          trace($rs);
          return  json_encode($rs); */
+    }
+
+    public function history()
+    {
+        $page = input('page', 1);
+        $p = input('p');
+        $l = input('l');
+        $sql = "exec getPlans @h='history',@productid='$p',@lot='$l'";
+
+        $rs = Db::connect("SqlserverHis")->query($sql);
+        trace($rs);
+        return  json_encode($rs);
     }
 
     public function planslist()
